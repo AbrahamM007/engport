@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import './Hero.css';
+import heroImage from './132838022.png';
 
 const Hero = () => {
   return (
@@ -44,8 +45,8 @@ const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="hero-image-placeholder">
-            {/* You can place an <img /> tag here */}
+          <div className="hero-image-container">
+            <img src={heroImage} alt="Abraham" className="hero-image" />
           </div>
         </motion.div>
       </div>
