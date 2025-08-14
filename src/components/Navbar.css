@@ -1,0 +1,114 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 0;
+  background: transparent;
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar.scrolled {
+  background: var(--background);
+  box-shadow: var(--shadow-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--foreground);
+  font-family: var(--font-serif);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--muted-foreground);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.25rem 0;
+  transition: color 0.3s ease;
+  position: relative;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+  color: var(--foreground);
+}
+
+.nav-link.active {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-contact {
+    background: var(--foreground);
+    color: var(--background);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-contact:hover {
+    opacity: 0.8;
+}
+
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--foreground);
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--background);
+    flex-direction: column;
+    padding: 2rem 0;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .btn-contact {
+      display: none;
+  }
+}
