@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Mail } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -11,28 +11,62 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const closeMenu = () => setIsOpen(false);
+
+  const navLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/artifacts', label: 'Artifacts' },
+    { to: '/senior-project', label: 'Senior Project' },
+    { to: '/college-readiness', label: 'College' },
+    { to: '/career-readiness', label: 'Career' }
+  ];
+
   return (
     <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
-        <NavLink to="/" className="nav-logo">
+        <NavLink to="/" className="nav-logo" onClick={closeMenu}>
           Abraham.
         </NavLink>
-        <nav className={`nav-menu ${isOpen ? 'active' : ''}`}>
-          <NavLink to="/" className="nav-link" onClick={() => setIsOpen(false)}>Home</NavLink>
-          <NavLink to="/artifacts" className="nav-link" onClick={() => setIsOpen(false)}>Artifacts</NavLink>
-          <NavLink to="/senior-project" className="nav-link" onClick={() => setIsOpen(false)}>Senior Project</NavLink>
-          <NavLink to="/college-readiness" className="nav-link" onClick={() => setIsOpen(false)}>College</NavLink>
-          <NavLink to="/career-readiness" className="nav-link" onClick={() => setIsOpen(false)}>Career</NavLink>
+
+        <nav className={`nav-menu ${isOpen ? 'mobile active' : ''}`}>
+          {navLinks.map((link, index) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className="nav-link"
+              onClick={closeMenu}
+              style={{ animationDelay: `${0.1 + index * 0.05}s` }}
+            >
+              {link.label}
+            </NavLink>
+          ))}
         </nav>
+
         <div className="nav-actions">
-            <button className="btn-contact">Contact</button>
-            <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X /> : <Menu />}
-            </button>
+          <a 
+            href="mailto:abraham@example.com" 
+            className="btn-contact"
+            aria-label="Contact via email"
+          >
+            <Mail size={16} />
+            <span>Contact</span>
+          </a>
+          
+          <button 
+            className={`nav-toggle ${isOpen ? 'active' : ''}`}
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={isOpen}
+          >
+            <span className="nav-toggle-line"></span>
+            <span className="nav-toggle-line"></span>
+            <span className="nav-toggle-line"></span>
+          </button>
         </div>
       </div>
     </header>
