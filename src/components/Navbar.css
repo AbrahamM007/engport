@@ -3,12 +3,16 @@
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(var(--background-rgb, 255, 255, 255), 0.98);
   border-bottom: var(--border);
   z-index: 1000;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: var(--transition);
+}
+
+[data-theme="dark"] .navbar {
+  background: rgba(0, 0, 0, 0.98);
 }
 
 .navbar-container {
@@ -25,6 +29,7 @@
   letter-spacing: var(--letter-spacing-wide);
   transition: var(--transition);
   position: relative;
+  cursor: none;
 }
 
 .navbar-brand a::after {
@@ -55,6 +60,7 @@
   border-bottom: 1px solid transparent;
   position: relative;
   overflow: hidden;
+  cursor: none;
 }
 
 .navbar-link:hover {

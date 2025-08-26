@@ -20,7 +20,7 @@ export default function CursorFX() {
     };
 
     const onOver = (e) => {
-      const interactive = e.target.closest('a, button, .interactive, [role="button"], .magnetic-button, .morphing-icon');
+      const interactive = e.target.closest('a, button, .interactive, [role="button"], .magnetic-button, .morphing-icon, .navbar-link, .navbar-brand a, .footer-right, .pilot-fab');
       const text = e.target.matches('input[type="text"], input[type="email"], textarea');
       const image = e.target.matches('img, .hero-image');
       
@@ -40,9 +40,9 @@ export default function CursorFX() {
       document.body.classList.remove('cursor-interactive', 'cursor-text', 'cursor-image', 'cursor-magnetic');
     };
 
-    window.addEventListener('mousemove', onMove, { passive: true });
-    window.addEventListener('mouseover', onOver);
-    window.addEventListener('mouseleave', onLeave);
+    document.addEventListener('mousemove', onMove, { passive: true });
+    document.addEventListener('mouseover', onOver);
+    document.addEventListener('mouseleave', onLeave);
 
     const loop = () => {
       // Different easing for each layer
@@ -71,9 +71,9 @@ export default function CursorFX() {
     loop();
 
     return () => {
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseover', onOver);
-      window.removeEventListener('mouseleave', onLeave);
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseover', onOver);
+      document.removeEventListener('mouseleave', onLeave);
     };
   }, []);
 

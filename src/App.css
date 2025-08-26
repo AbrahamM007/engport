@@ -59,6 +59,63 @@
   --transition: all 0.2s ease;
   --transition-fast: all 0.1s ease;
   --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  --background: #000000;
+  --background-secondary: #0a0a0a;
+  --background-tertiary: #151515;
+
+  --foreground: #ffffff;
+  --foreground-secondary: #cccccc;
+  --foreground-muted: #999999;
+  --foreground-subtle: #666666;
+
+  --primary: #ffffff;
+  --primary-hover: #cccccc;
+  --accent-line: #333333;
+  --accent-dark-line: #444444;
+
+  --border: 1px solid var(--accent-line);
+  --border-thin: 1px solid var(--accent-line);
+  --border-hover: 1px solid var(--accent-dark-line);
+  --border-dark: 1px solid var(--foreground-muted);
+  --surface: transparent;
+  --surface-hover: rgba(255, 255, 255, 0.02);
+  --surface-active: rgba(255, 255, 255, 0.05);
+}
+  /* Typography */
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Letter spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+
+  /* Spacing scale */
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem; --space-20: 5rem; --space-24: 6rem; --space-32: 8rem;
+  --space-section: var(--space-24);
+
+  /* Radii (minimal) */
+  --radius: 0px;
+  --radius-minimal: 2px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+
+  /* Transitions */
+  --transition: all 0.2s ease;
+  --transition-fast: all 0.1s ease;
+  --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
 
   /* Legacy variable aliases */
   --text-light: var(--foreground);
@@ -70,6 +127,7 @@
 /* Base */
 * {
   box-sizing: border-box;
+  cursor: none;
 }
 
 html, body, #root {
@@ -86,6 +144,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Remove all previous FX layers */

@@ -240,11 +240,18 @@ body.cursor-image .cursor-trail {
 }
 
 /* Hide default cursor on interactive elements */
-body.cursor-interactive *,
-body.cursor-text *,
-body.cursor-image *,
-body.cursor-magnetic * {
+a, button, .interactive, [role="button"], .magnetic-button, .morphing-icon,
+.navbar-link, .navbar-brand a, .footer-right, .pilot-fab, input, textarea {
   cursor: none !important;
+}
+
+/* Ensure cursor works everywhere */
+* {
+  cursor: none;
+}
+
+body {
+  cursor: none;
 }
 
 /* Responsive - Hide on touch devices */
@@ -254,5 +261,9 @@ body.cursor-magnetic * {
   .cursor-trail,
   .cursor-magnetic-field {
     display: none;
+  }
+  
+  * {
+    cursor: auto !important;
   }
 }
