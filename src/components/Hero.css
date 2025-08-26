@@ -212,21 +212,37 @@
   display: flex;
   justify-content: center;
   animation: fadeInUp 0.8s ease-out 0.8s both;
+  position: relative;
 }
 
 .hero-image-container {
   position: relative;
   width: 250px;
   height: 250px;
-  border: var(--border);
-  border-radius: var(--radius-minimal);
   overflow: hidden;
   transition: var(--transition);
+  cursor: pointer;
+}
+
+.hero-image-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--foreground), transparent, var(--foreground));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hero-image-container:hover::before {
+  opacity: 1;
 }
 
 .hero-image-container:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  transform: scale(1.02) rotate(0.5deg);
 }
 
 .hero-image {
@@ -234,10 +250,30 @@
   height: 100%;
   object-fit: cover;
   transition: var(--transition);
+  border: var(--border);
+  border-radius: var(--radius-minimal);
 }
 
 .hero-image-container:hover .hero-image {
-  transform: scale(1.05);
+  transform: scale(1.03);
+  filter: contrast(1.1);
+}
+
+.image-frame {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-minimal);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hero-image-container:hover .image-frame {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {

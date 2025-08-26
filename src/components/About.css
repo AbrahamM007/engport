@@ -1,0 +1,195 @@
+.about {
+  padding: var(--space-32) 0;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.section-marker {
+  width: 32px;
+  height: 1px;
+  background: var(--foreground);
+  animation: expandWidth 1s ease-out 0.5s both;
+}
+
+@keyframes expandWidth {
+  from { width: 0; }
+  to { width: 32px; }
+}
+
+.about-header h1 {
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-light);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.about-text .lead {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-normal);
+  color: var(--foreground);
+  line-height: 1.4;
+}
+
+.about-text p {
+  color: var(--foreground-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4) 0;
+  border-top: var(--border);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.stat-item:hover {
+  transform: translateY(-2px);
+}
+
+.stat-item:hover .stat-number {
+  transform: scale(1.1);
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-light);
+  color: var(--foreground);
+  transition: var(--transition);
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--foreground-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.about-visual {
+  animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+
+.philosophy-card {
+  padding: var(--space-8);
+  border: var(--border);
+  border-radius: var(--radius-minimal);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.philosophy-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--foreground);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s ease;
+}
+
+.philosophy-card:hover::before {
+  transform: scaleX(1);
+}
+
+.philosophy-card h3 {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-6);
+  color: var(--foreground);
+}
+
+.philosophy-points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.point {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.point:hover {
+  transform: translateX(4px);
+}
+
+.point-marker {
+  width: 8px;
+  height: 8px;
+  border: var(--border);
+  border-radius: 50%;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.point:hover .point-marker {
+  background: var(--foreground);
+  transform: scale(1.2);
+}
+
+.point span {
+  color: var(--foreground-muted);
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.point:hover span {
+  color: var(--foreground);
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+  
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-header h1 {
+    font-size: 2rem;
+  }
+}
