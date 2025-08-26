@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <nav className="navbar">
       <div className="navbar-container container">
         <div className="navbar-brand">
-          <a href="/">Abraham</a>
+          <Link to="/">Abraham</Link>
         </div>
 
         <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
-          <a href="#about" className="navbar-link">About</a>
-          <a href="#artifacts" className="navbar-link">Work</a>
-          <a href="#contact" className="navbar-link">Contact</a>
+          <Link to="/about" className={`navbar-link ${location.pathname === '/about' ? 'active' : ''}`}>About</Link>
+          <Link to="/work" className={`navbar-link ${location.pathname === '/work' ? 'active' : ''}`}>Work</Link>
+          <Link to="/contact" className={`navbar-link ${location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
         </div>
 
         <button 
