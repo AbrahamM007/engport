@@ -1,7 +1,7 @@
 import React from 'react';
 import { Github, Linkedin, Mail, ArrowRight, Download } from 'lucide-react';
 import './Hero.css';
-import heroImage from './132838022.png';
+import heroImage from './Abraham-image.png';
 
 function Hero() {
   return (
