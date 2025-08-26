@@ -1,0 +1,46 @@
+.pilot-fab {
+  position: fixed; right: 22px; bottom: 22px;
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--surface); color: var(--foreground);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  display: grid; place-items: center; z-index: 1200;
+}
+.pilot-fab:hover { background: var(--surface-hover); border-color: var(--border-hover); }
+
+.pilot-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 1199;
+  backdrop-filter: blur(2px);
+}
+
+.pilot-panel {
+  position: fixed; right: 22px; bottom: 76px; width: 360px; max-width: calc(100% - 44px);
+  transform: translateY(20px); opacity: 0; pointer-events: none;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  box-shadow: var(--shadow-lg); overflow: hidden; z-index: 1201;
+  transition: all .25s var(--ease-premium);
+}
+.pilot-panel.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+
+.pilot-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px; border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,.04), transparent);
+}
+.pilot-title { font-weight: 700; letter-spacing: .02em; }
+.pilot-close { background: transparent; border: 0; color: var(--foreground-muted); }
+
+.pilot-log { max-height: 300px; overflow: auto; padding: 10px 12px; display: grid; gap: 8px; }
+.pilot-msg { padding: 10px 12px; border-radius: 10px; font-size: .92rem; }
+.pilot-msg.user { background: rgba(0,229,255,.1); border: 1px solid rgba(0,229,255,.2); justify-self: end; }
+.pilot-msg.ai { background: rgba(167,139,250,.08); border: 1px solid rgba(167,139,250,.2); }
+
+.pilot-input { display: flex; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--border); }
+.pilot-input input {
+  flex: 1; background: rgba(255,255,255,.04); border: 1px solid var(--border);
+  color: var(--foreground); border-radius: 10px; padding: 10px 12px; outline: none;
+}
+.pilot-input button {
+  width: 40px; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--foreground);
+}

@@ -127,6 +127,8 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   group: artifact;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .artifact-card::before {
@@ -474,4 +476,276 @@
 .artifact-card:focus:not(:focus-visible),
 .artifact-link:focus:not(:focus-visible) {
   outline: none;
+}
+
+/* Aurora gradient that softly moves behind content */
+.card-aurora {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(60% 60% at 20% 30%, rgba(0,229,255,0.18), transparent 60%),
+              radial-gradient(50% 50% at 80% 70%, rgba(167,139,250,0.16), transparent 60%);
+  filter: blur(30px);
+  opacity: .0;
+  transition: opacity .5s var(--ease-premium), transform .6s var(--ease-premium);
+  z-index: 0;
+}
+
+/* Directional shine that travels across on hover */
+.card-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 55%, transparent 100%);
+  transform: translateX(-120%);
+  transition: transform .8s var(--ease-premium);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.artifact-card:hover .card-aurora { opacity: .7; transform: scale(1.02); }
+.artifact-card:hover .card-shine { transform: translateX(120%); }
+
+/* Keep media/content above layers */
+.artifact-media, .artifact-content { position: relative; z-index: 2; }
+
+.artifacts {
+  padding: var(--space-section) 0;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.artifacts-header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.artifacts-header h2 {
+  font-size: 2rem;
+  font-weight: var(--font-weight-light);
+  margin: 0 0 var(--space-4) 0;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.artifacts-header p {
+  font-size: 1rem;
+  color: var(--foreground-muted);
+  margin: 0;
+}
+
+.grade-selector {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-12);
+  flex-wrap: wrap;
+}
+
+.grade-button {
+  background: transparent;
+  border: var(--border-thin);
+  color: var(--foreground-muted);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-minimal);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.grade-button:hover {
+  border-color: var(--foreground);
+  color: var(--foreground);
+}
+
+.grade-button.active {
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
+}
+
+.grade-label {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.grade-year {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.artifacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--space-8);
+}
+
+.artifact-card {
+  background: var(--background);
+  border: var(--border-thin);
+  border-radius: var(--radius-minimal);
+  padding: var(--space-6);
+  transition: var(--transition);
+}
+
+.artifact-card:hover {
+  border-color: var(--foreground);
+}
+
+.artifact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.artifact-icon {
+  width: 32px;
+  height: 32px;
+  border: var(--border-thin);
+  border-radius: var(--radius-minimal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.artifact-category {
+  font-size: 0.75rem;
+  color: var(--foreground-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.artifact-content h3 {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-medium);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.artifact-content p {
+  color: var(--foreground-muted);
+  line-height: 1.6;
+  margin: 0 0 var(--space-4) 0;
+}
+
+.artifact-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.skill-tag {
+  font-size: 0.75rem;
+  padding: var(--space-1) var(--space-3);
+  border: var(--border-thin);
+  border-radius: var(--radius-minimal);
+  color: var(--foreground-muted);
+}
+
+.artifact-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-4);
+  border-top: var(--border-thin);
+}
+
+.artifact-type {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  color: var(--foreground-muted);
+}
+
+.view-button {
+  background: transparent;
+  border: var(--border-thin);
+  color: var(--foreground);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-minimal);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+}
+
+.view-button:hover {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+@media (max-width: 768px) {
+  .artifacts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .grade-selector {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.artifact-card {
+  border: var(--border);
+  padding: var(--space-6);
+  transition: var(--transition);
+  background: var(--background);
+}
+
+.artifact-card:hover {
+  border-color: var(--accent-dark-line);
+  background: var(--surface-hover);
+}
+
+.artifact-content {
+  margin-bottom: var(--space-6);
+}
+
+.artifact-title {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-medium);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.artifact-description {
+  color: var(--foreground-muted);
+  line-height: 1.6;
+  margin: 0 0 var(--space-4) 0;
+}
+
+.artifact-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tech-tag {
+  font-size: 0.75rem;
+  padding: var(--space-1) var(--space-2);
+  border: var(--border);
+  color: var(--foreground-muted);
+  background: var(--background-secondary);
+}
+
+.artifact-links {
+  display: flex;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: var(--border);
+}
+
+.artifact-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  color: var(--foreground-muted);
+  transition: var(--transition);
+}
+
+.artifact-link:hover {
+  color: var(--foreground);
 }
