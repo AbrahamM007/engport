@@ -104,7 +104,7 @@ const Artifacts = () => {
   };
 
   return (
-    <section className="artifacts">
+    <section className="artifacts section">
       <div className="container">
         <div className="artifacts-header">
           <h2>Academic Artifacts</h2>

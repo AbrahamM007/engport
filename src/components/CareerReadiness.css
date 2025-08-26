@@ -1,42 +1,61 @@
 .career-readiness {
   position: relative;
-  padding: 6rem 0;
-  overflow: hidden;
+  padding: var(--space-24) 0;
+  border-bottom: var(--border);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+.section-header h1 {
+  font-size: 2rem;
+  font-weight: var(--font-weight-light);
+  margin: 0 0 var(--space-4) 0;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.section-header p {
+  font-size: 1rem;
+  color: var(--foreground-muted);
+  margin: 0;
 }
 
 .career-overview {
-  margin-bottom: 4rem;
-  padding: 2rem;
+  margin-bottom: var(--space-12);
+  padding: var(--space-6);
+  border: var(--border);
+  border-radius: var(--radius-minimal);
 }
 
 .overview-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
+  gap: var(--space-4);
 }
 
 .stat-card {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--background-secondary);
+  border-radius: var(--radius-minimal);
+  border: var(--border);
   cursor: pointer;
-  transition: all 0.3s ease;
-  transform-style: preserve-3d;
+  transition: var(--transition);
 }
 
 .stat-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+  background: var(--surface-hover);
+  border-color: var(--foreground);
 }
 
 .stat-icon {
-  width: 40px;
-  height: 40px;
-  color: var(--primary-color);
+  width: 32px;
+  height: 32px;
+  color: var(--foreground);
   flex-shrink: 0;
 }
 
@@ -46,175 +65,171 @@
 }
 
 .stat-number {
-  font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
 }
 
 .stat-label {
-  color: var(--text-gray);
-  font-size: 0.9rem;
+  color: var(--foreground-muted);
+  font-size: 0.875rem;
 }
 
 .career-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  margin-bottom: 4rem;
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
 }
 
 .experiences-section h2,
 .skills-section h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-6);
+  color: var(--foreground);
 }
 
 .experiences-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--space-4);
 }
 
 .experience-card {
-  padding: 2rem;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: var(--space-6);
+  border: var(--border);
+  border-radius: var(--radius-minimal);
+  transition: var(--transition);
   cursor: pointer;
   position: relative;
   overflow: hidden;
 }
 
-.experience-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-  transition: left 0.6s ease;
-}
-
-.experience-card:hover::before {
-  left: 100%;
+.experience-card:hover {
+  background: var(--surface-hover);
+  border-color: var(--foreground);
 }
 
 .exp-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-3);
 }
 
 .exp-header h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--text-light);
-  margin-bottom: 0.3rem;
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+  margin-bottom: var(--space-1);
 }
 
 .company {
-  color: var(--text-gray);
-  font-weight: 500;
+  color: var(--foreground-muted);
+  font-weight: var(--font-weight-normal);
+  font-size: 0.875rem;
 }
 
 .exp-meta {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .exp-type {
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-minimal);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-medium);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: var(--border);
+  background: var(--background-secondary);
 }
 
 .exp-type.internship {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
 }
 
 .exp-type.freelance {
-  background: linear-gradient(135deg, var(--secondary-color), #10b981);
-  color: white;
+  background: var(--background-tertiary);
+  color: var(--foreground);
 }
 
 .exp-type.volunteer {
-  background: linear-gradient(135deg, #8b5cf6, var(--primary-color));
-  color: white;
+  background: var(--background-secondary);
+  color: var(--foreground-muted);
 }
 
 .duration {
-  color: var(--text-gray);
-  font-size: 0.9rem;
+  color: var(--foreground-muted);
+  font-size: 0.875rem;
 }
 
 .exp-description {
-  color: var(--text-gray);
+  color: var(--foreground-muted);
   line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-4);
+  font-size: 0.875rem;
 }
 
 .exp-skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .skill-tag {
-  padding: 0.4rem 0.8rem;
-  background: rgba(99, 102, 241, 0.2);
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
+  padding: var(--space-1) var(--space-2);
+  background: var(--background-secondary);
+  border: var(--border);
+  color: var(--foreground-muted);
+  border-radius: var(--radius-minimal);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .skill-tag:hover {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  transform: translateY(-2px);
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
 }
 
 .skills-categories {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--space-6);
 }
 
 .skill-category {
-  padding: 2rem;
+  padding: var(--space-6);
+  border: var(--border);
+  border-radius: var(--radius-minimal);
 }
 
 .skill-category h3 {
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
-  color: var(--text-light);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-4);
+  color: var(--foreground);
 }
 
 .skills-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--space-3);
 }
 
 .skill-item {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .skill-info {
@@ -224,127 +239,118 @@
 }
 
 .skill-name {
-  color: var(--text-light);
-  font-weight: 500;
+  color: var(--foreground);
+  font-weight: var(--font-weight-medium);
+  font-size: 0.875rem;
 }
 
 .skill-percentage {
-  color: var(--text-gray);
-  font-size: 0.9rem;
+  color: var(--foreground-muted);
+  font-size: 0.875rem;
 }
 
 .skill-bar {
-  height: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  height: 4px;
+  background: var(--accent-line);
+  border-radius: var(--radius-minimal);
   overflow: hidden;
 }
 
 .skill-progress {
   height: 100%;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  border-radius: 10px;
+  background: var(--foreground);
+  border-radius: var(--radius-minimal);
   position: relative;
 }
 
-.skill-progress::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
 .certifications-section {
-  margin-bottom: 4rem;
+  margin-bottom: var(--space-12);
 }
 
 .certifications-section h2 {
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 3rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-8);
+  color: var(--foreground);
 }
 
 .certifications-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  gap: var(--space-6);
 }
 
 .certification-card {
-  padding: 2rem;
+  padding: var(--space-6);
   text-align: center;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: var(--border);
+  border-radius: var(--radius-minimal);
+  transition: var(--transition);
   cursor: pointer;
-  transform-style: preserve-3d;
+}
+
+.certification-card:hover {
+  background: var(--surface-hover);
+  border-color: var(--foreground);
 }
 
 .cert-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 1rem;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--space-3);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  border-radius: 50%;
-  color: white;
+  background: var(--foreground);
+  border-radius: var(--radius-minimal);
+  color: var(--background);
 }
 
 .certification-card h4 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-light);
+  font-size: 1rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-2);
+  color: var(--foreground);
 }
 
 .cert-issuer {
-  color: var(--text-gray);
-  margin-bottom: 0.5rem;
+  color: var(--foreground-muted);
+  margin-bottom: var(--space-2);
+  font-size: 0.875rem;
 }
 
 .cert-date {
-  color: var(--primary-color);
-  font-weight: 600;
-  font-size: 0.9rem;
+  color: var(--foreground);
+  font-weight: var(--font-weight-medium);
+  font-size: 0.875rem;
 }
 
 .career-goals {
-  padding: 3rem;
+  padding: var(--space-6);
+  border: var(--border);
+  border-radius: var(--radius-minimal);
 }
 
 .career-goals h2 {
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-6);
+  color: var(--foreground);
 }
 
 .goals-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: var(--space-8);
 }
 
 .goal-item h3 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  color: var(--text-light);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-3);
+  color: var(--foreground);
 }
 
 .goal-item ul {
@@ -353,36 +359,36 @@
 }
 
 .goal-item li {
-  padding: 0.8rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-gray);
+  padding: var(--space-2) 0;
+  border-bottom: var(--border);
+  color: var(--foreground-muted);
   position: relative;
-  padding-left: 1.5rem;
+  padding-left: var(--space-4);
+  font-size: 0.875rem;
 }
 
 .goal-item li::before {
-  content: '▶';
+  content: '—';
   position: absolute;
   left: 0;
-  color: var(--primary-color);
-  font-size: 0.8rem;
+  color: var(--foreground);
+  font-weight: var(--font-weight-medium);
 }
 
 .goal-item li:hover {
-  color: var(--text-light);
-  transform: translateX(5px);
-  transition: all 0.3s ease;
+  color: var(--foreground);
+  transition: var(--transition);
 }
 
 @media (max-width: 1024px) {
   .career-content {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: var(--space-8);
   }
   
   .goals-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: var(--space-6);
   }
 }
 
