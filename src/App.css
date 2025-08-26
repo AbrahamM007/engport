@@ -78,6 +78,12 @@
   --accent-dark-line: #444444;
 
   --border: 1px solid var(--accent-line);
+
+  --surface: rgba(255, 255, 255, 0.02);
+  --surface-hover: rgba(255, 255, 255, 0.05);
+  --surface-active: rgba(255, 255, 255, 0.08);
+}
+
 /* Cursor handling moved to CursorFX.css for better organization */
 
 html, body, #root {
