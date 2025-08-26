@@ -267,6 +267,8 @@ a, button, input, textarea, select,
 .contact-form input, .contact-form textarea,
 .contact-form button, .social-link,
 .stat-item, .point, .philosophy-card,
+.hero-image, .image-wrapper, .hero-actions button,
+.hero-social a, .navbar-toggle, .footer-hub button,
 [role="button"], [tabindex="0"] {
   cursor: none !important;
 }
@@ -287,4 +289,13 @@ a, button, input, textarea, select,
   body, html {
     cursor: auto !important;
   }
+}
+
+/* Dark mode adaptations */
+[data-theme="dark"] .cursor-magnetic-field {
+  background: radial-gradient(circle, transparent 70%, rgba(255,255,255,0.02) 100%);
+}
+
+[data-theme="dark"] body.cursor-magnetic .cursor-ring {
+  background: rgba(255,255,255,0.05);
 }

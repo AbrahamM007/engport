@@ -34,6 +34,8 @@ export default function CursorFX() {
         .contact-form input, .contact-form textarea,
         .contact-form button, .social-link,
         .stat-item, .point, .philosophy-card,
+        .hero-image, .image-wrapper, .hero-actions button,
+        .hero-social a, .navbar-toggle, .footer-hub button,
         [role="button"], [tabindex="0"]
       `);
       
@@ -67,7 +69,8 @@ export default function CursorFX() {
         if (interactive.classList.contains('magnetic-element') || 
             interactive.classList.contains('primary-button') ||
             interactive.classList.contains('secondary-button') ||
-            interactive.classList.contains('social-link')) {
+            interactive.classList.contains('social-link') ||
+            interactive.tagName === 'BUTTON') {
           document.body.classList.add('cursor-magnetic');
         }
       }
