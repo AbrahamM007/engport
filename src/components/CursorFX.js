@@ -20,19 +20,39 @@ export default function CursorFX() {
     };
 
     const onOver = (e) => {
-      const interactive = e.target.closest('a, button, .interactive, [role="button"], .magnetic-button, .morphing-icon, .navbar-link, .navbar-brand a, .footer-right, .pilot-fab');
-      const text = e.target.matches('input[type="text"], input[type="email"], textarea');
-      const image = e.target.matches('img, .hero-image');
+      // Check for all interactive elements
+      const interactive = e.target.closest(`
+        a, button, input, textarea, select,
+        .interactive, .magnetic-element, .social-link,
+        .navbar-link, .navbar-brand a, .footer-right, 
+        .pilot-fab, .pilot-close, .grade-button,
+        .view-button, .submit-button, .contact-method,
+        .skill-tag, .artifact-card, .feature-card,
+        .certification-card, .achievement-item,
+        .stat-card, .experience-card, .timeline-item,
+        .primary-button, .secondary-button,
+        [role="button"], [tabindex="0"]
+      `);
       
-      document.body.classList.toggle('cursor-interactive', !!interactive);
-      document.body.classList.toggle('cursor-text', text);
-      document.body.classList.toggle('cursor-image', image);
+      const text = e.target.matches('input[type="text"], input[type="email"], input[type="number"], textarea, [contenteditable="true"]');
+      const image = e.target.matches('img, .hero-image, .quantum-frame, .image-wrapper');
       
-      // Magnetic effect for special elements
-      if (interactive && interactive.classList.contains('magnetic-button')) {
-        document.body.classList.add('cursor-magnetic');
-      } else {
-        document.body.classList.remove('cursor-magnetic');
+      // Remove all cursor states first
+      document.body.classList.remove('cursor-interactive', 'cursor-text', 'cursor-image', 'cursor-magnetic');
+      
+      if (text) {
+        document.body.classList.add('cursor-text');
+      } else if (image) {
+        document.body.classList.add('cursor-image');
+      } else if (interactive) {
+        document.body.classList.add('cursor-interactive');
+        
+        // Special magnetic effect for certain elements
+        if (interactive.classList.contains('magnetic-element') || 
+            interactive.classList.contains('primary-button') ||
+            interactive.classList.contains('secondary-button')) {
+          document.body.classList.add('cursor-magnetic');
+        }
       }
     };
 
@@ -40,14 +60,15 @@ export default function CursorFX() {
       document.body.classList.remove('cursor-interactive', 'cursor-text', 'cursor-image', 'cursor-magnetic');
     };
 
+    // Use document instead of window for better coverage
     document.addEventListener('mousemove', onMove, { passive: true });
-    document.addEventListener('mouseover', onOver);
-    document.addEventListener('mouseleave', onLeave);
+    document.addEventListener('mouseover', onOver, { passive: true });
+    document.addEventListener('mouseleave', onLeave, { passive: true });
 
     const loop = () => {
-      // Different easing for each layer
-      rx += (x - rx) * 0.2;
-      ry += (y - ry) * 0.2;
+      // Different easing for each layer for smooth following effect
+      rx += (x - rx) * 0.15;
+      ry += (y - ry) * 0.15;
       tx += (rx - tx) * 0.08;
       ty += (ry - ty) * 0.08;
       mx += (tx - mx) * 0.04;

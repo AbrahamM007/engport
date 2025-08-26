@@ -1,93 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
 import './Hero.css';
 
-// Revolutionary Minimalist SVG Icons with Morphing Capabilities
-const MinimalGithub = ({ isActive }) => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5">
-    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-    <animateTransform
-      attributeName="transform"
-      type="rotate"
-      values={isActive ? "0;360;0" : "0"}
-      dur="2s"
-      repeatCount="indefinite"
-    />
-  </svg>
-);
-
-const MinimalLinkedin = ({ isActive }) => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5">
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-    <rect x="2" y="9" width="4" height="12"/>
-    <circle cx="4" cy="4" r="2"/>
-    <animate
-      attributeName="stroke-width"
-      values={isActive ? "0.5;1;0.5" : "0.5"}
-      dur="1.5s"
-      repeatCount="indefinite"
-    />
-  </svg>
-);
-
-const MinimalMail = ({ isActive }) => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5">
-    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-    <polyline points="22,6 12,13 2,6">
-      <animate
-        attributeName="points"
-        values={isActive ? "22,6 12,13 2,6;22,6 12,8 2,6;22,6 12,13 2,6" : "22,6 12,13 2,6"}
-        dur="2s"
-        repeatCount="indefinite"
-      />
-    </polyline>
-  </svg>
-);
-
-// Revolutionary Line Art Portrait Component
-const LineArtPortrait = () => (
-  <svg width="250" height="250" viewBox="0 0 250 250" className="line-art-portrait">
-    {/* Face outline */}
-    <path d="M125 30 C160 30, 190 60, 190 100 C190 140, 180 170, 165 190 C150 210, 135 220, 125 220 C115 220, 100 210, 85 190 C70 170, 60 140, 60 100 C60 60, 90 30, 125 30 Z" 
-          fill="none" stroke="currentColor" strokeWidth="0.5" className="face-outline"/>
-    
-    {/* Hair */}
-    <path d="M125 30 C140 25, 160 30, 175 45 C185 35, 190 50, 185 65 C180 45, 165 35, 145 40 C135 35, 125 30, 125 30" 
-          fill="none" stroke="currentColor" strokeWidth="0.5" className="hair"/>
-    <path d="M125 30 C110 25, 90 30, 75 45 C65 35, 60 50, 65 65 C70 45, 85 35, 105 40 C115 35, 125 30, 125 30" 
-          fill="none" stroke="currentColor" strokeWidth="0.5" className="hair"/>
-    
-    {/* Eyes */}
-    <circle cx="105" cy="90" r="2" fill="none" stroke="currentColor" strokeWidth="0.5" className="eye"/>
-    <circle cx="145" cy="90" r="2" fill="none" stroke="currentColor" strokeWidth="0.5" className="eye"/>
-    <path d="M100 85 C105 82, 110 85, 110 85" fill="none" stroke="currentColor" strokeWidth="0.5" className="eyebrow"/>
-    <path d="M140 85 C145 82, 150 85, 150 85" fill="none" stroke="currentColor" strokeWidth="0.5" className="eyebrow"/>
-    
-    {/* Nose */}
-    <path d="M125 95 L125 110 M120 110 L130 110" fill="none" stroke="currentColor" strokeWidth="0.5" className="nose"/>
-    
-    {/* Mouth */}
-    <path d="M115 130 C120 135, 130 135, 135 130" fill="none" stroke="currentColor" strokeWidth="0.5" className="mouth"/>
-    
-    {/* Neck and shoulders */}
-    <path d="M115 220 L115 240 M135 220 L135 240" fill="none" stroke="currentColor" strokeWidth="0.5" className="neck"/>
-    <path d="M90 240 C100 235, 115 240, 125 240 C135 240, 150 235, 160 240" fill="none" stroke="currentColor" strokeWidth="0.5" className="shoulders"/>
-    
-    {/* Subtle details */}
-    <path d="M80 120 C85 115, 90 120, 95 115" fill="none" stroke="currentColor" strokeWidth="0.3" opacity="0.6" className="detail"/>
-    <path d="M155 115 C160 120, 165 115, 170 120" fill="none" stroke="currentColor" strokeWidth="0.3" opacity="0.6" className="detail"/>
-  </svg>
-);
-
-// Revolutionary Cursor Wake System
-const CursorWakes = () => {
+// Revolutionary Magnetic Field Component inspired by SIZE
+const MagneticField = () => {
   const canvasRef = useRef(null);
-  const wakesRef = useRef([]);
+  const particlesRef = useRef([]);
   const mouseRef = useRef({ x: 0, y: 0 });
   const animationRef = useRef();
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
+    
     const ctx = canvas.getContext('2d');
     
     const resizeCanvas = () => {
@@ -96,47 +21,70 @@ const CursorWakes = () => {
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     };
 
-    const createWake = (x, y) => {
-      wakesRef.current.push({
-        x,
-        y,
-        radius: 0,
-        maxRadius: Math.random() * 50 + 30,
-        opacity: 0.8,
-        speed: Math.random() * 0.5 + 0.3,
-        life: 1
-      });
+    // Initialize particles for TRAE-style background
+    const initParticles = () => {
+      particlesRef.current = [];
+      for (let i = 0; i < 30; i++) {
+        particlesRef.current.push({
+          x: Math.random() * canvas.offsetWidth,
+          y: Math.random() * canvas.offsetHeight,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          size: Math.random() * 1.5 + 0.5,
+          opacity: Math.random() * 0.3 + 0.1,
+          connections: []
+        });
+      }
     };
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
       
-      // Update and draw wakes
-      wakesRef.current = wakesRef.current.filter(wake => {
-        wake.radius += wake.speed;
-        wake.life -= 0.008;
-        wake.opacity = wake.life * 0.3;
+      particlesRef.current.forEach((particle, i) => {
+        // Mouse interaction - SIZE style magnetic effect
+        const dx = mouseRef.current.x - particle.x;
+        const dy = mouseRef.current.y - particle.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (wake.life > 0) {
-          // Draw outer circle (black)
-          ctx.beginPath();
-          ctx.arc(wake.x, wake.y, wake.radius, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(0, 0, 0, ${wake.opacity})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
+        if (distance < 150) {
+          const force = (150 - distance) / 150;
+          particle.vx -= (dx / distance) * force * 0.008;
+          particle.vy -= (dy / distance) * force * 0.008;
+        }
+        
+        // Update position
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        
+        // Boundaries with bounce
+        if (particle.x < 0 || particle.x > canvas.offsetWidth) particle.vx *= -0.8;
+        if (particle.y < 0 || particle.y > canvas.offsetHeight) particle.vy *= -0.8;
+        
+        // Keep in bounds
+        particle.x = Math.max(0, Math.min(canvas.offsetWidth, particle.x));
+        particle.y = Math.max(0, Math.min(canvas.offsetHeight, particle.y));
+        
+        // Draw particle - minimalist dot
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 0, 0, ${particle.opacity})`;
+        ctx.fill();
+        
+        // TRAE-style connections
+        particlesRef.current.slice(i + 1).forEach(otherParticle => {
+          const dx2 = particle.x - otherParticle.x;
+          const dy2 = particle.y - otherParticle.y;
+          const distance2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
           
-          // Draw inner circle (grey)
-          if (wake.radius > 10) {
+          if (distance2 < 100) {
             ctx.beginPath();
-            ctx.arc(wake.x, wake.y, wake.radius - 10, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(100, 100, 100, ${wake.opacity * 0.6})`;
-            ctx.lineWidth = 0.3;
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.strokeStyle = `rgba(0, 0, 0, ${0.05 * (1 - distance2 / 100)})`;
+            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
-          
-          return true;
-        }
-        return false;
+        });
       });
       
       animationRef.current = requestAnimationFrame(animate);
@@ -144,188 +92,220 @@ const CursorWakes = () => {
 
     const handleMouseMove = (e) => {
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      // Create wake every few pixels of movement
-      const dx = x - mouseRef.current.x;
-      const dy = y - mouseRef.current.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      
-      if (distance > 15) {
-        createWake(x, y);
-        mouseRef.current = { x, y };
-      }
+      mouseRef.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
     };
 
     resizeCanvas();
+    initParticles();
     animate();
 
     canvas.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      initParticles();
+    });
 
     return () => {
-      cancelAnimationFrame(animationRef.current);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
       canvas.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', resizeCanvas);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="cursor-wakes" />;
+  return <canvas ref={canvasRef} className="magnetic-field" />;
 };
 
-// Revolutionary Morphing Text Component
-const MorphingText = ({ text, className }) => {
+// Revolutionary Text Morphing inspired by TRAE
+const MorphingText = ({ text, className, delay = 0 }) => {
   const [displayText, setDisplayText] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    let currentIndex = 0;
-    const interval = setInterval(() => {
-      if (currentIndex <= text.length) {
-        setDisplayText(text.slice(0, currentIndex));
-        currentIndex++;
-      } else {
-        setIsComplete(true);
-        clearInterval(interval);
+    const timer = setTimeout(() => {
+      if (currentIndex < text.length) {
+        setDisplayText(text.slice(0, currentIndex + 1));
+        setCurrentIndex(prev => prev + 1);
       }
-    }, 80);
+    }, delay + currentIndex * 30);
 
-    return () => clearInterval(interval);
-  }, [text]);
+    return () => clearTimeout(timer);
+  }, [currentIndex, text, delay]);
 
-  return (
-    <span className={`${className} ${isComplete ? 'complete' : ''}`}>
-      {displayText}
-      {!isComplete && <span className="cursor-blink">|</span>}
-      }
-    </span>
-  );
+  return <span className={className}>{displayText}</span>;
 };
 
-// Revolutionary Glitch Text Effect
-const GlitchText = ({ children, className }) => {
-  const [isGlitching, setIsGlitching] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsGlitching(true);
-      setTimeout(() => setIsGlitching(false), 150);
-    }, 8000);
-
-    return () => clearInterval(interval);
-  }, []);
-
+// SIZE-inspired Floating Elements
+const FloatingElements = () => {
   return (
-    <span className={`${className} ${isGlitching ? 'glitch' : ''}`} data-text={children}>
-      {children}
-    </span>
+    <div className="floating-elements">
+      <div className="floating-shape shape-1"></div>
+      <div className="floating-shape shape-2"></div>
+      <div className="floating-shape shape-3"></div>
+      <div className="floating-line line-1"></div>
+      <div className="floating-line line-2"></div>
+      <div className="floating-dot dot-1"></div>
+      <div className="floating-dot dot-2"></div>
+    </div>
   );
 };
 
 function Hero() {
-  const [activeIcon, setActiveIcon] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef(null);
 
   useEffect(() => {
     setIsLoaded(true);
     
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-          }
+    const handleMouseMove = (e) => {
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: ((e.clientX - rect.left) / rect.width - 0.5) * 30,
+          y: ((e.clientY - rect.top) / rect.height - 0.5) * 30
         });
-      },
-      { threshold: 0.1 }
-    );
+      }
+    };
 
-    if (heroRef.current) {
-      observer.observe(heroRef.current);
+    const heroElement = heroRef.current;
+    if (heroElement) {
+      heroElement.addEventListener('mousemove', handleMouseMove);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      if (heroElement) {
+        heroElement.removeEventListener('mousemove', handleMouseMove);
+      }
+    };
   }, []);
 
   return (
     <section className={`hero ${isLoaded ? 'loaded' : ''}`} ref={heroRef}>
-      <CursorWakes />
+      <MagneticField />
+      <FloatingElements />
       
       <div className="hero-container container">
         <div className="hero-content">
+          {/* SIZE-inspired Status Indicator */}
           <div className="hero-status">
-            <span className="status-dot quantum-pulse"></span>
-            <MorphingText text="Available for new opportunities" className="status-text" />
+            <div className="status-indicator">
+              <div className="status-dot"></div>
+              <div className="status-ripple"></div>
+              <div className="status-pulse"></div>
+            </div>
+            <MorphingText 
+              text="Available for opportunities" 
+              className="status-text"
+              delay={500}
+            />
           </div>
 
-          <h1 className="hero-greeting">
-            <GlitchText className="hero-name">Abraham</GlitchText>
-          </h1>
+          {/* Revolutionary Typography inspired by TRAE */}
+          <div className="hero-text">
+            <h1 className="hero-title">
+              <span className="title-line">
+                <MorphingText text="Abraham" className="name-text" delay={800} />
+              </span>
+              <span className="title-line">
+                <MorphingText text="Hernandez" className="surname-text" delay={1200} />
+              </span>
+            </h1>
+            
+            <div className="hero-subtitle">
+              <MorphingText 
+                text="Software Engineer & UI Designer" 
+                className="subtitle-text"
+                delay={1600}
+              />
+            </div>
+            
+            <div className="hero-description">
+              <MorphingText 
+                text="Creating exceptional digital experiences through innovative design and clean code architecture."
+                className="description-text"
+                delay={2000}
+              />
+            </div>
+          </div>
 
-          <h2 className="hero-tagline holographic-text">
-            Software Engineer & UI Designer
-          </h2>
-
-          <p className="hero-description typewriter-text">
-            I create clean, functional interfaces and robust systems. 
-            Focused on simplicity, performance, and user experience.
-          </p>
-
+          {/* SIZE-inspired Action Buttons */}
           <div className="hero-actions">
-            <a href="/work" className="hero-cta magnetic-button">
+            <button className="primary-button magnetic-button">
               <span className="button-text">View Work</span>
-              <ArrowRight size={16} className="button-icon" />
-            </a>
-            <a href="/resume.pdf" className="hero-secondary glass-button" target="_blank" rel="noopener noreferrer">
+              <div className="button-arrow">
+                <ArrowRight size={16} />
+              </div>
+              <div className="button-ripple"></div>
+            </button>
+            
+            <button className="secondary-button magnetic-button">
               <Download size={16} />
               <span>Resume</span>
-            </a>
+              <div className="button-ripple"></div>
+            </button>
           </div>
 
-          <div className="social-links">
-            <a 
-              href="https://github.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="social-link morphing-icon" 
-              aria-label="GitHub"
-              onMouseEnter={() => setActiveIcon('github')}
-              onMouseLeave={() => setActiveIcon(null)}
-            >
-              <MinimalGithub isActive={activeIcon === 'github'} />
+          {/* TRAE-inspired Social Links */}
+          <div className="hero-social">
+            <a href="https://github.com" className="social-link magnetic-button">
+              <Github size={18} />
+              <div className="social-ripple"></div>
             </a>
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="social-link morphing-icon" 
-              aria-label="LinkedIn"
-              onMouseEnter={() => setActiveIcon('linkedin')}
-              onMouseLeave={() => setActiveIcon(null)}
-            >
-              <MinimalLinkedin isActive={activeIcon === 'linkedin'} />
+            <a href="https://linkedin.com" className="social-link magnetic-button">
+              <Linkedin size={18} />
+              <div className="social-ripple"></div>
             </a>
-            <a 
-              href="mailto:abraham@example.com" 
-              className="social-link morphing-icon" 
-              aria-label="Email"
-              onMouseEnter={() => setActiveIcon('mail')}
-              onMouseLeave={() => setActiveIcon(null)}
-            >
-              <MinimalMail isActive={activeIcon === 'mail'} />
+            <a href="mailto:abraham@example.com" className="social-link magnetic-button">
+              <Mail size={18} />
+              <div className="social-ripple"></div>
             </a>
           </div>
         </div>
 
+        {/* Revolutionary Image Section inspired by SIZE */}
         <div className="hero-visual">
-          <div className="hero-image-container quantum-frame">
-            <LineArtPortrait />
-            <div className="image-frame"></div>
-            <div className="quantum-border"></div>
+          <div className="image-container">
+            <div 
+              className="image-wrapper"
+              style={{
+                transform: `translate(${mousePosition.x * 0.3}px, ${mousePosition.y * 0.3}px) rotateX(${mousePosition.y * 0.1}deg) rotateY(${mousePosition.x * 0.1}deg)`
+              }}
+            >
+              <img 
+                src="/Abraham.png" 
+                alt="Abraham Hernandez"
+                className="hero-image"
+              />
+              <div className="image-overlay"></div>
+              <div className="image-frame"></div>
+              <div className="image-glow"></div>
+            </div>
+            
+            {/* SIZE-inspired Geometric Elements */}
+            <div className="geometric-elements">
+              <div className="geo-circle-1"></div>
+              <div className="geo-circle-2"></div>
+              <div className="geo-line-1"></div>
+              <div className="geo-line-2"></div>
+              <div className="geo-line-3"></div>
+              <div className="geo-dot-1"></div>
+              <div className="geo-dot-2"></div>
+              <div className="geo-dot-3"></div>
+            </div>
           </div>
         </div>
+      </div>
+      
+      {/* TRAE-inspired Scroll Indicator */}
+      <div className="scroll-indicator">
+        <div className="scroll-line"></div>
+        <div className="scroll-dot"></div>
+        <div className="scroll-text">Scroll to explore</div>
       </div>
     </section>
   );
