@@ -11,7 +11,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-container container">
         <div className="navbar-brand">
-          <Link to="/">Abraham</Link>
+          <Link to="/">Abraham Mora-Tadeo</Link>
         </div>
 
         <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>

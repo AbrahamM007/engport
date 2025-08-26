@@ -134,7 +134,7 @@ const MorphingText = ({ text, className, delay = 0 }) => {
         setDisplayText(text.slice(0, currentIndex + 1));
         setCurrentIndex(prev => prev + 1);
       }
-    }, delay + currentIndex * 50);
+    }, delay + currentIndex * 25);
 
     return () => clearTimeout(timer);
   }, [currentIndex, text, delay]);
@@ -241,7 +241,7 @@ function Hero() {
                 <GlitchText text="Abraham" className="name-text" />
               </span>
               <span className="title-line">
-                <MorphingText text="Hernandez" className="surname-text" delay={1200} />
+                <MorphingText text="Mora-Tadeo" className="surname-text" delay={800} />
               </span>
             </h1>
             
@@ -249,7 +249,7 @@ function Hero() {
               <MorphingText 
                 text="Software Engineer & UI Designer" 
                 className="subtitle-text"
-                delay={1600}
+                delay={1000}
               />
             </div>
             
@@ -257,7 +257,7 @@ function Hero() {
               <MorphingText 
                 text="Creating exceptional digital experiences through innovative design and clean code architecture."
                 className="description-text"
-                delay={2000}
+                delay={1200}
               />
             </div>
           </div>

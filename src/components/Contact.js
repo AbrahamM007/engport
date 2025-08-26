@@ -47,7 +47,7 @@ const Contact = () => {
                 <Mail size={20} />
                 <div className="method-content">
                   <span className="method-label">Email</span>
-                  <span className="method-value">abraham@example.com</span>
+                  <span className="method-value">abraham.mora-tadeo@example.com</span>
                 </div>
               </a>
               
