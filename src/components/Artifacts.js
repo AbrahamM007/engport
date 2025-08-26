@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Play, Image, Code, Palette, Cpu, Zap } from 'lucide-react';
+import { ExternalLink, Play, Image, Code, Palette, Cpu, Zap } from 'lucide-react';
 import './Artifacts.css';
 
 const Artifacts = () => {
