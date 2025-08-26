@@ -19,7 +19,7 @@ const Artifacts = () => {
         title: 'Introduction to CAD Design',
         description: 'My first venture into computer-aided design, creating basic mechanical parts and learning the fundamentals of 3D modeling with precision and attention to detail.',
         type: 'image',
-        media: 'https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=800',
+        media: '/api/placeholder/400/300',
         skills: ['AutoCAD', 'Technical Drawing', 'Problem Solving', '3D Modeling'],
         category: 'Engineering',
         icon: <Cpu />
@@ -29,7 +29,7 @@ const Artifacts = () => {
         title: 'Simple Circuit Design',
         description: 'Building foundational knowledge in electronics through hands-on circuit construction, exploring the relationship between voltage, current, and resistance.',
         type: 'video',
-        media: 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=800',
+        media: '/api/placeholder/400/300',
         skills: ['Electronics', 'Circuit Analysis', 'Breadboarding', 'Multimeter Usage'],
         category: 'Electronics',
         icon: <Zap />
@@ -41,7 +41,7 @@ const Artifacts = () => {
         title: 'Robotics Competition Entry',
         description: 'Led a team to design and build an autonomous robot for regional competition, integrating mechanical design with advanced programming concepts.',
         type: 'video',
-        media: 'https://images.pexels.com/photos/2085831/pexels-photo-2085831.jpeg?auto=compress&cs=tinysrgb&w=800',
+        media: '/api/placeholder/400/300',
         skills: ['Robotics', 'Python Programming', 'Teamwork', 'Project Management'],
         category: 'Robotics',
         icon: <Code />
@@ -73,7 +73,7 @@ const Artifacts = () => {
         title: 'Engineering Design Challenge',
         description: 'Participated in a state-level engineering competition, designing sustainable solutions for real-world environmental challenges.',
         type: 'image',
-        media: 'https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=800',
+        media: '/api/placeholder/400/300',
         skills: ['Sustainable Design', 'Research', 'Presentation', 'Innovation'],
         category: 'Engineering',
         icon: <Palette />
@@ -85,7 +85,7 @@ const Artifacts = () => {
         title: 'Senior Capstone Project',
         description: 'Culminating project integrating four years of learning, featuring advanced engineering principles and real-world application.',
         type: 'video',
-        media: 'https://images.pexels.com/photos/2085831/pexels-photo-2085831.jpeg?auto=compress&cs=tinysrgb&w=800',
+        media: '/api/placeholder/400/300',
         skills: ['Project Management', 'Advanced Engineering', 'Research', 'Technical Writing'],
         category: 'Capstone',
         icon: <Cpu />
@@ -95,7 +95,7 @@ const Artifacts = () => {
         title: 'Industry Internship',
         description: 'Gained real-world experience working with professional engineers on cutting-edge technology projects.',
         type: 'image',
-        media: 'https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=800',
+        media: '/api/placeholder/400/300',
         skills: ['Professional Development', 'Industry Standards', 'Collaboration', 'Technical Skills'],
         category: 'Professional Experience',
         icon: <Zap />
@@ -139,6 +139,20 @@ const Artifacts = () => {
               <div className="artifact-content">
                 <h3>{artifact.title}</h3>
                 <p>{artifact.description}</p>
+                
+                {/* Line Art Placeholder for Images */}
+                <div className="artifact-visual">
+                  <svg width="100%" height="120" viewBox="0 0 300 120" className="line-art-placeholder">
+                    <rect x="10" y="10" width="280" height="100" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.6"/>
+                    <line x1="30" y1="30" x2="80" y2="80" stroke="currentColor" strokeWidth="0.5" opacity="0.4"/>
+                    <line x1="80" y1="30" x2="30" y2="80" stroke="currentColor" strokeWidth="0.5" opacity="0.4"/>
+                    <circle cx="150" cy="55" r="25" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.4"/>
+                    <path d="M200 30 L250 30 L270 55 L250 80 L200 80 Z" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.4"/>
+                    <text x="150" y="100" textAnchor="middle" fontSize="8" fill="currentColor" opacity="0.5">
+                      {artifact.category}
+                    </text>
+                  </svg>
+                </div>
                 
                 <div className="artifact-skills">
                   {artifact.skills.map((skill, index) => (

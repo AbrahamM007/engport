@@ -81,12 +81,25 @@
   border: var(--border);
   border-radius: var(--radius-minimal);
   overflow: hidden;
+  padding: var(--space-4);
+  background: var(--background-secondary);
 }
 
-.project-image img {
+.project-line-art {
+  width: 100%;
+  height: 100%;
+}
+
+.project-diagram {
   width: 100%;
   height: 300px;
-  object-fit: cover;
+  color: var(--foreground-muted);
+  transition: var(--transition);
+}
+
+.project-image:hover .project-diagram {
+  color: var(--foreground);
+  transform: scale(1.02);
 }
 
 .project-timeline {

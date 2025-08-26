@@ -16,6 +16,23 @@
   transform: translateY(0);
 }
 
+/* Revolutionary Cursor Wakes */
+.cursor-wakes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  animation: wakesFieldFadeIn 2s ease-out 1s forwards;
+}
+
+@keyframes wakesFieldFadeIn {
+  to { opacity: 1; }
+}
+
 /* Revolutionary Particle Field */
 .particle-field {
   position: absolute;
@@ -385,6 +402,42 @@
   background: conic-gradient(from 0deg, var(--foreground), transparent, var(--foreground));
   z-index: -1;
   opacity: 0;
+.line-art-portrait {
+  width: 200px;
+  height: 200px;
+  color: var(--foreground);
+  transition: all 0.6s ease;
+}
+
+.line-art-portrait .face-outline,
+.line-art-portrait .hair,
+.line-art-portrait .eye,
+.line-art-portrait .eyebrow,
+.line-art-portrait .nose,
+.line-art-portrait .mouth,
+.line-art-portrait .neck,
+.line-art-portrait .shoulders {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 3s ease-out forwards;
+}
+
+.line-art-portrait .face-outline { animation-delay: 0.2s; }
+.line-art-portrait .hair { animation-delay: 0.4s; }
+.line-art-portrait .eye { animation-delay: 0.6s; }
+.line-art-portrait .eyebrow { animation-delay: 0.7s; }
+.line-art-portrait .nose { animation-delay: 0.8s; }
+.line-art-portrait .mouth { animation-delay: 0.9s; }
+.line-art-portrait .neck { animation-delay: 1.0s; }
+.line-art-portrait .shoulders { animation-delay: 1.1s; }
+.line-art-portrait .detail { animation-delay: 1.2s; }
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
   transition: opacity 0.6s ease;
   animation: quantumRotate 4s linear infinite;
 }
@@ -415,6 +468,11 @@
 .quantum-frame:hover .hero-image {
   transform: scale(1.1);
   filter: grayscale(0%) contrast(1.1);
+}
+
+.quantum-frame:hover .line-art-portrait {
+  transform: scale(1.05);
+  color: var(--foreground-secondary);
 }
 
 .image-frame {
@@ -503,6 +561,11 @@
     height: 200px;
   }
 
+  .line-art-portrait {
+    width: 160px;
+    height: 160px;
+  }
+
   .hero-description.typewriter-text {
     white-space: normal;
     border-right: none;
@@ -514,6 +577,7 @@
   will-change: transform, opacity;
 }
 
+.cursor-wakes,
 .particle-field,
 .quantum-frame,
 .magnetic-button,

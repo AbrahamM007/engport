@@ -84,7 +84,40 @@ const SeniorProject = () => {
           </div>
           
           <div className="project-image">
-            <img src="https://images.pexels.com/photos/2085831/pexels-photo-2085831.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Senior Project" />
+            <div className="project-line-art">
+              <svg width="100%" height="300" viewBox="0 0 400 300" className="project-diagram">
+                {/* IoT System Diagram */}
+                <rect x="50" y="50" width="80" height="60" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                <text x="90" y="85" textAnchor="middle" fontSize="10" fill="currentColor">Sensors</text>
+                
+                <rect x="160" y="50" width="80" height="60" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                <text x="200" y="85" textAnchor="middle" fontSize="10" fill="currentColor">MCU</text>
+                
+                <rect x="270" y="50" width="80" height="60" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                <text x="310" y="85" textAnchor="middle" fontSize="10" fill="currentColor">Cloud</text>
+                
+                <rect x="160" y="150" width="80" height="60" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                <text x="200" y="185" textAnchor="middle" fontSize="10" fill="currentColor">Mobile App</text>
+                
+                <rect x="50" y="230" width="80" height="40" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                <text x="90" y="255" textAnchor="middle" fontSize="10" fill="currentColor">Irrigation</text>
+                
+                <rect x="270" y="230" width="80" height="40" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                <text x="310" y="255" textAnchor="middle" fontSize="10" fill="currentColor">Analytics</text>
+                
+                {/* Connection Lines */}
+                <line x1="130" y1="80" x2="160" y2="80" stroke="currentColor" strokeWidth="0.5"/>
+                <line x1="240" y1="80" x2="270" y2="80" stroke="currentColor" strokeWidth="0.5"/>
+                <line x1="200" y1="110" x2="200" y2="150" stroke="currentColor" strokeWidth="0.5"/>
+                <line x1="160" y1="185" x2="130" y2="250" stroke="currentColor" strokeWidth="0.5"/>
+                <line x1="240" y1="185" x2="270" y2="250" stroke="currentColor" strokeWidth="0.5"/>
+                
+                {/* Data Flow Arrows */}
+                <polygon points="155,78 165,83 155,88" fill="currentColor" opacity="0.6"/>
+                <polygon points="265,78 275,83 265,88" fill="currentColor" opacity="0.6"/>
+                <polygon points="198,145 203,155 193,155" fill="currentColor" opacity="0.6"/>
+              </svg>
+            </div>
           </div>
         </div>
         

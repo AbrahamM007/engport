@@ -180,6 +180,26 @@
   margin: 0 0 var(--space-4) 0;
 }
 
+.artifact-visual {
+  margin: var(--space-4) 0;
+  border: var(--border);
+  border-radius: var(--radius-minimal);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.line-art-placeholder {
+  width: 100%;
+  height: 120px;
+  color: var(--foreground-muted);
+  transition: var(--transition);
+}
+
+.artifact-card:hover .line-art-placeholder {
+  color: var(--foreground);
+  transform: scale(1.02);
+}
+
 .artifact-skills {
   display: flex;
   flex-wrap: wrap;
