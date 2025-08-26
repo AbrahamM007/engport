@@ -7,8 +7,8 @@
   overflow: hidden;
   background: var(--background);
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translateY(50px);
+  transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .hero.loaded {
@@ -16,7 +16,7 @@
   transform: translateY(0);
 }
 
-/* Revolutionary Magnetic Field Background */
+/* Revolutionary Magnetic Field Background - SIZE inspired */
 .magnetic-field {
   position: absolute;
   top: 0;
@@ -26,14 +26,14 @@
   pointer-events: none;
   z-index: 1;
   opacity: 0;
-  animation: fieldFadeIn 2s ease-out 1s forwards;
+  animation: fieldFadeIn 3s ease-out 1s forwards;
 }
 
 @keyframes fieldFadeIn {
   to { opacity: 1; }
 }
 
-/* Revolutionary Floating Elements */
+/* SIZE-inspired Floating Elements */
 .floating-elements {
   position: absolute;
   top: 0;
@@ -44,33 +44,115 @@
   z-index: 2;
 }
 
-.floating-dot {
+.floating-shape {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: var(--foreground);
+  border: 0.5px solid var(--foreground);
+  opacity: 0.1;
+}
+
+.shape-1 {
+  top: 15%;
+  left: 10%;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  opacity: 0.3;
-  animation: floatDot 8s ease-in-out infinite;
+  animation: floatShape1 12s ease-in-out infinite;
+}
+
+.shape-2 {
+  top: 60%;
+  right: 15%;
+  width: 40px;
+  height: 40px;
+  transform: rotate(45deg);
+  animation: floatShape2 15s ease-in-out infinite;
+}
+
+.shape-3 {
+  bottom: 20%;
+  left: 20%;
+  width: 80px;
+  height: 1px;
+  animation: floatShape3 10s ease-in-out infinite;
 }
 
 .floating-line {
   position: absolute;
-  width: 1px;
-  height: 40px;
   background: var(--foreground);
+  opacity: 0.05;
+}
+
+.line-1 {
+  top: 25%;
+  right: 25%;
+  width: 1px;
+  height: 100px;
+  animation: floatLine1 8s ease-in-out infinite;
+}
+
+.line-2 {
+  bottom: 30%;
+  left: 15%;
+  width: 120px;
+  height: 1px;
+  animation: floatLine2 11s ease-in-out infinite;
+}
+
+.floating-dot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--foreground);
+  border-radius: 50%;
   opacity: 0.2;
-  animation: floatLine 6s ease-in-out infinite;
 }
 
-@keyframes floatDot {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
+.dot-1 {
+  top: 35%;
+  left: 8%;
+  animation: floatDot1 9s ease-in-out infinite;
 }
 
-@keyframes floatLine {
-  0%, 100% { transform: translateX(0px) scaleY(1); }
-  50% { transform: translateX(10px) scaleY(1.2); }
+.dot-2 {
+  bottom: 40%;
+  right: 12%;
+  animation: floatDot2 13s ease-in-out infinite;
+}
+
+@keyframes floatShape1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+  50% { transform: translateY(-30px) rotate(180deg); opacity: 0.2; }
+}
+
+@keyframes floatShape2 {
+  0%, 100% { transform: rotate(45deg) translateX(0px); opacity: 0.1; }
+  50% { transform: rotate(225deg) translateX(20px); opacity: 0.15; }
+}
+
+@keyframes floatShape3 {
+  0%, 100% { transform: scaleX(1); opacity: 0.1; }
+  50% { transform: scaleX(1.5); opacity: 0.2; }
+}
+
+@keyframes floatLine1 {
+  0%, 100% { transform: translateY(0px) scaleY(1); }
+  50% { transform: translateY(-15px) scaleY(1.3); }
+}
+
+@keyframes floatLine2 {
+  0%, 100% { transform: translateX(0px) scaleX(1); }
+  50% { transform: translateX(10px) scaleX(1.2); }
+}
+
+@keyframes floatDot1 {
+  0%, 100% { transform: translate(0px, 0px); }
+  33% { transform: translate(10px, -15px); }
+  66% { transform: translate(-5px, -25px); }
+}
+
+@keyframes floatDot2 {
+  0%, 100% { transform: translate(0px, 0px); }
+  50% { transform: translate(-20px, 15px); }
 }
 
 /* Revolutionary Container */
@@ -78,8 +160,8 @@
   position: relative;
   z-index: 3;
   display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: var(--space-20);
+  grid-template-columns: 1fr 450px;
+  gap: var(--space-24);
   align-items: center;
   width: 100%;
   max-width: 1400px;
@@ -91,16 +173,16 @@
 .hero-content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--space-10);
 }
 
-/* Revolutionary Status Indicator */
+/* SIZE-inspired Status Indicator */
 .hero-status {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-4);
   opacity: 0;
-  animation: slideInLeft 0.8s ease-out 0.5s forwards;
+  animation: slideInLeft 1s cubic-bezier(0.19, 1, 0.22, 1) 0.5s forwards;
 }
 
 .status-indicator {
@@ -138,7 +220,7 @@
 
 @keyframes ripple {
   0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(2); opacity: 0; }
+  100% { transform: scale(2.5); opacity: 0; }
 }
 
 .status-text {
@@ -152,15 +234,15 @@
 /* Revolutionary Typography */
 .hero-text {
   opacity: 0;
-  animation: slideInUp 0.8s ease-out 0.7s forwards;
+  animation: slideInUp 1s cubic-bezier(0.19, 1, 0.22, 1) 0.7s forwards;
 }
 
 .hero-title {
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(3.5rem, 8vw, 7rem);
   font-weight: var(--font-weight-light);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--space-6);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-8);
   display: flex;
   flex-direction: column;
 }
@@ -172,32 +254,84 @@
 
 .name-text {
   display: inline-block;
-  animation: slideInUp 0.8s ease-out 0.8s both;
+  position: relative;
+  animation: slideInUp 1s cubic-bezier(0.19, 1, 0.22, 1) 0.8s both;
 }
 
 .surname-text {
   display: inline-block;
   color: var(--foreground-muted);
-  animation: slideInUp 0.8s ease-out 1s both;
+  animation: slideInUp 1s cubic-bezier(0.19, 1, 0.22, 1) 1s both;
+}
+
+/* TRAE-inspired Glitch Effect */
+.glitch {
+  position: relative;
+  animation: glitch 0.2s ease-in-out;
+}
+
+.glitch-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch-layer:nth-child(2) {
+  color: var(--foreground);
+  animation: glitch-1 0.2s ease-in-out;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+
+.glitch-layer:nth-child(3) {
+  color: var(--foreground-muted);
+  animation: glitch-2 0.2s ease-in-out;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-1 {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(2px, -2px); }
+  40% { transform: translate(-2px, 2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(-2px, -2px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
 }
 
 .hero-subtitle {
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
 }
 
 .subtitle-text {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: var(--font-weight-normal);
   color: var(--foreground-secondary);
   letter-spacing: var(--letter-spacing-wide);
 }
 
 .hero-description {
-  max-width: 500px;
+  max-width: 520px;
 }
 
 .description-text {
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.6;
   color: var(--foreground-muted);
 }
@@ -205,9 +339,9 @@
 /* Revolutionary Action Buttons */
 .hero-actions {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-6);
   opacity: 0;
-  animation: slideInUp 0.8s ease-out 1.2s forwards;
+  animation: slideInUp 1s cubic-bezier(0.19, 1, 0.22, 1) 1.2s forwards;
 }
 
 .primary-button,
@@ -215,8 +349,8 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-4) var(--space-6);
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-8);
   border: 1px solid var(--foreground);
   background: transparent;
   color: var(--foreground);
@@ -226,7 +360,8 @@
   text-transform: uppercase;
   cursor: none;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 1;
 }
 
 .primary-button {
@@ -242,7 +377,7 @@
   width: 100%;
   height: 100%;
   background: var(--foreground);
-  transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: left 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   z-index: -1;
 }
 
@@ -251,8 +386,8 @@
 }
 
 .magnetic-element:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .magnetic-element:hover .button-bg,
@@ -269,19 +404,19 @@
 }
 
 .button-arrow {
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .magnetic-element:hover .button-arrow {
-  transform: translateX(4px);
+  transform: translateX(6px);
 }
 
 /* Revolutionary Social Links */
 .hero-social {
   display: flex;
-  gap: var(--space-3);
+  gap: var(--space-4);
   opacity: 0;
-  animation: slideInUp 0.8s ease-out 1.4s forwards;
+  animation: slideInUp 1s cubic-bezier(0.19, 1, 0.22, 1) 1.4s forwards;
 }
 
 .social-link {
@@ -289,33 +424,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border: 1px solid var(--accent-line);
   background: transparent;
   color: var(--foreground-muted);
   cursor: none;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 1;
 }
 
 .social-link:hover {
   color: var(--background);
   border-color: var(--foreground);
-  transform: translateY(-2px) rotate(5deg);
+  transform: translateY(-3px) rotate(5deg);
 }
 
 /* Revolutionary Visual Section */
 .hero-visual {
   position: relative;
   opacity: 0;
-  animation: slideInRight 0.8s ease-out 1.6s forwards;
+  animation: slideInRight 1s cubic-bezier(0.19, 1, 0.22, 1) 1.6s forwards;
 }
 
 .image-container {
   position: relative;
-  width: 400px;
-  height: 500px;
+  width: 450px;
+  height: 550px;
 }
 
 .image-wrapper {
@@ -323,14 +459,15 @@
   width: 100%;
   height: 100%;
   transition: transform 0.1s ease-out;
+  transform-style: preserve-3d;
 }
 
 .hero-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) contrast(1.1);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  filter: grayscale(100%) contrast(1.2);
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .image-wrapper:hover .hero-image {
@@ -346,7 +483,7 @@
   height: 100%;
   background: linear-gradient(45deg, transparent 30%, rgba(0,0,0,0.1) 50%, transparent 70%);
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.8s ease;
   pointer-events: none;
 }
 
@@ -368,7 +505,7 @@
   bottom: -2px;
   border: 1px solid var(--foreground);
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.8s ease;
   pointer-events: none;
 }
 
@@ -435,7 +572,7 @@
   background: var(--foreground);
   border-radius: 50%;
   opacity: 0.4;
-  animation: floatDot 4s ease-in-out infinite;
+  animation: floatDot1 4s ease-in-out infinite;
 }
 
 .geo-dot-2 {
@@ -447,7 +584,7 @@
   background: var(--foreground);
   border-radius: 50%;
   opacity: 0.3;
-  animation: floatDot 4s ease-in-out infinite 2s;
+  animation: floatDot2 4s ease-in-out infinite 2s;
 }
 
 @keyframes rotateCircle {
@@ -469,14 +606,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-3);
   opacity: 0;
-  animation: fadeIn 0.8s ease-out 2s forwards;
+  animation: fadeIn 1s ease-out 2s forwards;
 }
 
 .scroll-line {
   width: 1px;
-  height: 40px;
+  height: 50px;
   background: var(--foreground-muted);
   animation: scrollPulse 2s ease-in-out infinite;
 }
@@ -497,17 +634,17 @@
 
 /* Animation Keyframes */
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-30px); }
+  from { opacity: 0; transform: translateX(-50px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(50px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: translateX(30px); }
+  from { opacity: 0; transform: translateX(50px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
@@ -525,8 +662,8 @@
   }
   
   .image-container {
-    width: 300px;
-    height: 400px;
+    width: 350px;
+    height: 450px;
     margin: 0 auto;
   }
 }
@@ -550,8 +687,8 @@
   }
   
   .image-container {
-    width: 250px;
-    height: 350px;
+    width: 280px;
+    height: 380px;
   }
 }
 

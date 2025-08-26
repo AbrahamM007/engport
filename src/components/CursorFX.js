@@ -20,7 +20,7 @@ export default function CursorFX() {
     };
 
     const onOver = (e) => {
-      // Check for all interactive elements
+      // Comprehensive selector for all interactive elements
       const interactive = e.target.closest(`
         a, button, input, textarea, select,
         .interactive, .magnetic-element, .social-link,
@@ -31,14 +31,30 @@ export default function CursorFX() {
         .certification-card, .achievement-item,
         .stat-card, .experience-card, .timeline-item,
         .primary-button, .secondary-button,
+        .contact-form input, .contact-form textarea,
+        .contact-form button, .social-link,
+        .stat-item, .point, .philosophy-card,
         [role="button"], [tabindex="0"]
       `);
       
-      const text = e.target.matches('input[type="text"], input[type="email"], input[type="number"], textarea, [contenteditable="true"]');
-      const image = e.target.matches('img, .hero-image, .quantum-frame, .image-wrapper');
+      const text = e.target.matches(`
+        input[type="text"], input[type="email"], 
+        input[type="number"], input[type="search"],
+        textarea, [contenteditable="true"]
+      `);
+      
+      const image = e.target.matches(`
+        img, .hero-image, .quantum-frame, 
+        .image-wrapper, .project-image
+      `);
       
       // Remove all cursor states first
-      document.body.classList.remove('cursor-interactive', 'cursor-text', 'cursor-image', 'cursor-magnetic');
+      document.body.classList.remove(
+        'cursor-interactive', 
+        'cursor-text', 
+        'cursor-image', 
+        'cursor-magnetic'
+      );
       
       if (text) {
         document.body.classList.add('cursor-text');
@@ -50,29 +66,35 @@ export default function CursorFX() {
         // Special magnetic effect for certain elements
         if (interactive.classList.contains('magnetic-element') || 
             interactive.classList.contains('primary-button') ||
-            interactive.classList.contains('secondary-button')) {
+            interactive.classList.contains('secondary-button') ||
+            interactive.classList.contains('social-link')) {
           document.body.classList.add('cursor-magnetic');
         }
       }
     };
 
     const onLeave = () => {
-      document.body.classList.remove('cursor-interactive', 'cursor-text', 'cursor-image', 'cursor-magnetic');
+      document.body.classList.remove(
+        'cursor-interactive', 
+        'cursor-text', 
+        'cursor-image', 
+        'cursor-magnetic'
+      );
     };
 
-    // Use document instead of window for better coverage
+    // Use document for comprehensive coverage
     document.addEventListener('mousemove', onMove, { passive: true });
     document.addEventListener('mouseover', onOver, { passive: true });
     document.addEventListener('mouseleave', onLeave, { passive: true });
 
     const loop = () => {
       // Different easing for each layer for smooth following effect
-      rx += (x - rx) * 0.15;
-      ry += (y - ry) * 0.15;
-      tx += (rx - tx) * 0.08;
-      ty += (ry - ty) * 0.08;
-      mx += (tx - mx) * 0.04;
-      my += (ty - my) * 0.04;
+      rx += (x - rx) * 0.2;
+      ry += (y - ry) * 0.2;
+      tx += (rx - tx) * 0.1;
+      ty += (ry - ty) * 0.1;
+      mx += (tx - mx) * 0.05;
+      my += (ty - my) * 0.05;
       
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;

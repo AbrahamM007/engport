@@ -78,19 +78,7 @@
   --accent-dark-line: #444444;
 
   --border: 1px solid var(--accent-line);
-  --border-thin: 1px solid var(--accent-line);
-  --border-hover: 1px solid var(--accent-dark-line);
-  --border-dark: 1px solid var(--foreground-muted);
-  --surface: transparent;
-  --surface-hover: rgba(255, 255, 255, 0.02);
-  --surface-active: rgba(255, 255, 255, 0.05);
-}
-
-/* Base */
-* {
-  box-sizing: border-box;
-  cursor: none;
-}
+/* Cursor handling moved to CursorFX.css for better organization */
 
 html, body, #root {
   height: 100%;
