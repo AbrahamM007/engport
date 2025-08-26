@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { BookOpen, Award, Users, TrendingUp } from 'lucide-react';
 import './CollegeReadiness.css';
 
@@ -76,40 +75,17 @@ const CollegeReadiness = () => {
 
   return (
     <section className="college-readiness section">
-      <div className="floating-shapes">
-        <div className="shape shape-1"></div>
-        <div className="shape shape-2"></div>
-      </div>
-      
       <div className="container">
-        <motion.div 
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="section-title gradient-text">College Readiness</h1>
-          <p className="section-subtitle">
-            Demonstrating academic excellence and preparation for higher education
-          </p>
-        </motion.div>
+        <div className="section-header">
+          <h1>College Readiness</h1>
+          <p>Demonstrating academic excellence and preparation for higher education</p>
+        </div>
         
-        <motion.div 
-          className="readiness-overview glass-effect"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-        >
+        <div className="readiness-overview">
           <h2>College Application Status</h2>
           <div className="prep-grid">
             {collegePrep.map((item, index) => (
-              <motion.div
-                key={index}
-                className="prep-item"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
-              >
+              <div key={index} className="prep-item">
                 <div className="prep-header">
                   <h3>{item.title}</h3>
                   <span className={`status ${item.status.toLowerCase().replace(' ', '-')}`}>
@@ -123,20 +99,14 @@ const CollegeReadiness = () => {
                     style={{ width: `${item.progress}%` }}
                   ></div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
         
         <div className="achievements-grid">
           {achievements.map((category, categoryIndex) => (
-            <motion.div
-              key={categoryIndex}
-              className="achievement-category glass-effect"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 + categoryIndex * 0.1, duration: 0.8 }}
-            >
+            <div key={categoryIndex} className="achievement-category">
               <div className="category-header">
                 <div className="category-icon">{category.icon}</div>
                 <h3>{category.category}</h3>
@@ -144,29 +114,17 @@ const CollegeReadiness = () => {
               
               <div className="achievement-list">
                 {category.items.map((item, itemIndex) => (
-                  <motion.div
-                    key={itemIndex}
-                    className="achievement-item"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.8 + categoryIndex * 0.1 + itemIndex * 0.05, duration: 0.6 }}
-                    whileHover={{ x: 10 }}
-                  >
+                  <div key={itemIndex} className="achievement-item">
                     <h4>{item.title}</h4>
                     <p>{item.description}</p>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
         
-        <motion.div 
-          className="college-goals glass-effect"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-        >
+        <div className="college-goals">
           <h2>Future Goals</h2>
           <div className="goals-content">
             <div className="goal-item">
@@ -189,7 +147,7 @@ const CollegeReadiness = () => {
               </ul>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
