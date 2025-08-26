@@ -198,6 +198,7 @@ const MorphingText = ({ text, className }) => {
     <span className={`${className} ${isComplete ? 'complete' : ''}`}>
       {displayText}
       {!isComplete && <span className="cursor-blink">|</span>}
+      }
     </span>
   );
 };
