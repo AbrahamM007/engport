@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Removed useLocation
 import './App.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -8,10 +8,11 @@ import Work from './components/Work';
 import Contact from './components/Contact';
 import CursorFX from './components/CursorFX';
 import AIPilot from './components/AIPilot';
+import AbrahamLLM from './components/AbrahamLLM'; // Revert to standard ES6 import
 import Footer from './components/Footer';
 
 function MainContent() {
-  const location = useLocation();
+  // const location = useLocation(); // Removed this line
   
   return (
     <main className="page">
@@ -34,6 +35,7 @@ function App() {
         <MainContent />
         <Footer />
         <AIPilot />
+        <AbrahamLLM />
       </div>
     </Router>
   );

@@ -1,336 +1,403 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
 import './Hero.css';
+import AbrahamImage from './Abraham.png'; // Add this import
+import { Link } from 'react-router-dom'; // Add this import
+import resumePDF from './AbrahamMora_Resume.pdf'; // Add this import
 
-// Revolutionary Magnetic Field Component inspired by SIZE
-const MagneticField = () => {
-  const canvasRef = useRef(null);
-  const particlesRef = useRef([]);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const animationRef = useRef();
-
+const Hero = () => {
+  const [loaded, setLoaded] = useState(false);
+  const heroRef = useRef(null);
+  const liquidRef = useRef(null);
+  const textRef = useRef(null);
+  const portraitRef = useRef(null);
+  const mousePos = useRef({ x: 0, y: 0 });
+  const rafId = useRef(null);
+  const quantumBackdropRef = useRef(null);
+  const neuralNodesRef = useRef([]);
+  
+  // Initialize the hero section
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    setTimeout(() => setLoaded(true), 300);
     
+    return () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
+  }, []);
+  
+  // Liquid morphing background effect
+  useEffect(() => {
+    if (!liquidRef.current) return;
+    
+    const canvas = liquidRef.current;
     const ctx = canvas.getContext('2d');
     
-    const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    // Set canvas dimensions
+    const setCanvasDimensions = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-
-    // Initialize particles for TRAE-style background
-    const initParticles = () => {
-      particlesRef.current = [];
-      for (let i = 0; i < 40; i++) {
-        particlesRef.current.push({
-          x: Math.random() * canvas.offsetWidth,
-          y: Math.random() * canvas.offsetHeight,
-          vx: (Math.random() - 0.5) * 0.2,
-          vy: (Math.random() - 0.5) * 0.2,
-          size: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.3 + 0.1,
-          originalOpacity: Math.random() * 0.3 + 0.1
-        });
-      }
-    };
-
+    
+    setCanvasDimensions();
+    window.addEventListener('resize', setCanvasDimensions);
+    
+    // Create liquid morphing effect
+    const points = [];
+    const numPoints = 10;
+    const pointRadius = Math.max(canvas.width, canvas.height) / 4;
+    
+    // Initialize points
+    for (let i = 0; i < numPoints; i++) {
+      const angle = (i / numPoints) * Math.PI * 2;
+      points.push({
+        x: canvas.width / 2 + Math.cos(angle) * pointRadius,
+        y: canvas.height / 2 + Math.sin(angle) * pointRadius,
+        originX: canvas.width / 2 + Math.cos(angle) * pointRadius,
+        originY: canvas.height / 2 + Math.sin(angle) * pointRadius,
+        vx: 0,
+        vy: 0
+      });
+    }
+    
+    // Animation loop
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      particlesRef.current.forEach((particle, i) => {
-        // Mouse interaction - SIZE style magnetic effect
-        const dx = mouseRef.current.x - particle.x;
-        const dy = mouseRef.current.y - particle.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+      // Update and draw liquid shape
+      ctx.beginPath();
+      
+      // Move to first point
+      ctx.moveTo(points[0].x, points[0].y);
+      
+      // Create smooth curve through all points
+      for (let i = 0; i < points.length; i++) {
+        const point = points[i];
+        const nextPoint = points[(i + 1) % points.length];
         
-        if (distance < 200) {
-          const force = (200 - distance) / 200;
-          particle.vx -= (dx / distance) * force * 0.01;
-          particle.vy -= (dy / distance) * force * 0.01;
-          particle.opacity = particle.originalOpacity + force * 0.3;
-        } else {
-          particle.opacity = particle.originalOpacity;
-        }
+        // Update point position with gentle movement
+        point.vx += (Math.random() - 0.5) * 0.2;
+        point.vy += (Math.random() - 0.5) * 0.2;
+        
+        // Apply friction
+        point.vx *= 0.98;
+        point.vy *= 0.98;
+        
+        // Apply spring force to return to origin
+        point.vx += (point.originX - point.x) * 0.01;
+        point.vy += (point.originY - point.y) * 0.01;
         
         // Update position
-        particle.x += particle.vx;
-        particle.y += particle.vy;
+        point.x += point.vx;
+        point.y += point.vy;
         
-        // Boundaries with bounce
-        if (particle.x < 0 || particle.x > canvas.offsetWidth) particle.vx *= -0.9;
-        if (particle.y < 0 || particle.y > canvas.offsetHeight) particle.vy *= -0.9;
+        // Create smooth curve to next point
+        const controlX = (point.x + nextPoint.x) / 2;
+        const controlY = (point.y + nextPoint.y) / 2;
         
-        // Keep in bounds
-        particle.x = Math.max(0, Math.min(canvas.offsetWidth, particle.x));
-        particle.y = Math.max(0, Math.min(canvas.offsetHeight, particle.y));
-        
-        // Draw particle - minimalist dot
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 0, 0, ${particle.opacity})`;
-        ctx.fill();
-        
-        // TRAE-style connections
-        particlesRef.current.slice(i + 1).forEach(otherParticle => {
-          const dx2 = particle.x - otherParticle.x;
-          const dy2 = particle.y - otherParticle.y;
-          const distance2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-          
-          if (distance2 < 120) {
-            ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(0, 0, 0, ${0.03 * (1 - distance2 / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        });
-      });
+        ctx.quadraticCurveTo(point.x, point.y, controlX, controlY);
+      }
       
-      animationRef.current = requestAnimationFrame(animate);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fill();
+      
+      rafId.current = requestAnimationFrame(animate);
     };
-
-    const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      };
-    };
-
-    resizeCanvas();
-    initParticles();
+    
     animate();
-
-    canvas.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      initParticles();
-    });
-
+    
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('resize', setCanvasDimensions);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
     };
   }, []);
-
-  return <canvas ref={canvasRef} className="magnetic-field" />;
-};
-
-// Revolutionary Text Morphing inspired by TRAE
-const MorphingText = ({ text, className, delay = 0 }) => {
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-
+  
+  // Neural network grid animation
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (currentIndex < text.length) {
-        setDisplayText(text.slice(0, currentIndex + 1));
-        setCurrentIndex(prev => prev + 1);
-      }
-    }, delay + currentIndex * 25);
-
-    return () => clearTimeout(timer);
-  }, [currentIndex, text, delay]);
-
-  return <span className={className}>{displayText}</span>;
-};
-
-// SIZE-inspired Floating Elements
-const FloatingElements = () => {
-  return (
-    <div className="floating-elements">
-      <div className="floating-shape shape-1"></div>
-      <div className="floating-shape shape-2"></div>
-      <div className="floating-shape shape-3"></div>
-      <div className="floating-line line-1"></div>
-      <div className="floating-line line-2"></div>
-      <div className="floating-dot dot-1"></div>
-      <div className="floating-dot dot-2"></div>
-    </div>
-  );
-};
-
-// Revolutionary Glitch Effect for Name
-const GlitchText = ({ text, className }) => {
-  const [isGlitching, setIsGlitching] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsGlitching(true);
-      setTimeout(() => setIsGlitching(false), 200);
-    }, 8000);
-
-    return () => clearInterval(interval);
+    const neuralGrid = document.querySelector('.neural-grid');
+    if (!neuralGrid) return;
+    
+    // Create neural nodes
+    for (let i = 0; i < 100; i++) {
+      const node = document.createElement('div');
+      node.className = 'neural-node';
+      node.style.setProperty('--i', Math.random() * 10);
+      node.style.left = `${Math.random() * 100}%`;
+      node.style.top = `${Math.random() * 100}%`;
+      neuralGrid.appendChild(node);
+      neuralNodesRef.current.push(node);
+    }
+    
+    return () => {
+      neuralNodesRef.current.forEach(node => {
+        if (node.parentNode) {
+          node.parentNode.removeChild(node);
+        }
+      });
+      neuralNodesRef.current = [];
+    };
   }, []);
-
-  return (
-    <span className={`${className} ${isGlitching ? 'glitch' : ''}`}>
-      {text}
-      {isGlitching && (
-        <>
-          <span className="glitch-layer" data-text={text}>{text}</span>
-          <span className="glitch-layer" data-text={text}>{text}</span>
-        </>
-      )}
-    </span>
-  );
-};
-
-function Hero() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const heroRef = useRef(null);
-
+  
+  // Quantum backdrop effect
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100);
+    if (!quantumBackdropRef.current || !heroRef.current) return;
     
     const handleMouseMove = (e) => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: ((e.clientX - rect.left) / rect.width - 0.5) * 20,
-          y: ((e.clientY - rect.top) / rect.height - 0.5) * 20
-        });
-      }
+      const { clientX, clientY } = e;
+      quantumBackdropRef.current.style.setProperty('--x', `${clientX}px`);
+      quantumBackdropRef.current.style.setProperty('--y', `${clientY}px`);
+      
+      mousePos.current = { x: clientX, y: clientY };
     };
-
-    const heroElement = heroRef.current;
-    if (heroElement) {
-      heroElement.addEventListener('mousemove', handleMouseMove);
-    }
-
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    
     return () => {
-      clearTimeout(timer);
-      if (heroElement) {
-        heroElement.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+  
+  // Parallax effect for portrait and elements
+  useEffect(() => {
+    if (!portraitRef.current || !heroRef.current) return;
+    
+    const parallaxElements = document.querySelectorAll('.parallax-element');
+    
+    const handleMouseMove = (e) => {
+      const { left, top, width, height } = heroRef.current.getBoundingClientRect();
+      const x = (e.clientX - left) / width - 0.5;
+      const y = (e.clientY - top) / height - 0.5;
+      
+      // Apply parallax to portrait
+      portraitRef.current.style.transform = `
+        perspective(1000px)
+        rotateY(${x * 5}deg)
+        rotateX(${y * -5}deg)
+        translateZ(20px)
+      `;
+      
+      // Apply parallax to other elements
+      parallaxElements.forEach(element => {
+        const speed = element.getAttribute('data-speed') || 1;
+        const xOffset = x * 30 * speed;
+        const yOffset = y * 30 * speed;
+        element.style.transform = `translate3d(${xOffset}px, ${yOffset}px, 0)`;
+      });
+    };
+    
+    heroRef.current.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      if (heroRef.current) {
+        heroRef.current.removeEventListener('mousemove', handleMouseMove);
       }
     };
   }, []);
+  
+  // Text reveal animation with quantum effect
+  useEffect(() => {
+    if (!textRef.current || !loaded) return;
+    
+    const text = textRef.current.innerText;
+    textRef.current.innerText = '';
+    
+    const revealText = async () => {
+      for (let i = 0; i < text.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 30));
+        
+        // Add quantum glitch effect randomly
+        if (Math.random() > 0.8) {
+          const glitchChar = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+          textRef.current.innerText = text.substring(0, i) + glitchChar;
+          await new Promise(resolve => setTimeout(resolve, 50));
+        }
+        
+        textRef.current.innerText = text.substring(0, i + 1);
+      }
+    };
+    
+    setTimeout(() => revealText(), 1000);
+  }, [loaded]);
 
   return (
-    <section className={`hero ${isLoaded ? 'loaded' : ''}`} ref={heroRef}>
-      <MagneticField />
-      <FloatingElements />
+    <section ref={heroRef} className={`hero-section ${loaded ? 'loaded' : ''}`}>
+      {/* SVG Definitions */}
+      <svg className="svg-defs">
+        <defs>
+          <filter id="noise" x="0%" y="0%" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+          </filter>
+          
+          {/* Circle SVG */}
+          <symbol id="geo-circle-svg" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="49" fill="none" stroke="rgba(0,0,0,0.2)" strokeWidth="1" />
+            <circle cx="50" cy="50" r="30" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5" />
+            <line x1="0" y1="50" x2="100" y2="50" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5" />
+            <line x1="50" y1="0" x2="50" y2="100" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5" />
+          </symbol>
+          
+          {/* Square SVG */}
+          <symbol id="geo-square-svg" viewBox="0 0 60 60">
+            <rect x="1" y="1" width="58" height="58" fill="none" stroke="rgba(0,0,0,0.2)" strokeWidth="1" />
+            <rect x="15" y="15" width="30" height="30" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5" />
+            <line x1="1" y1="1" x2="59" y2="59" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5" />
+            <line x1="59" y1="1" x2="1" y2="59" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5" />
+          </symbol>
+          
+          {/* Triangle SVG */}
+          <symbol id="geo-triangle-svg" viewBox="0 0 80 80">
+            <polygon points="40,1 1,79 79,79" fill="none" stroke="rgba(0,0,0,0.2)" strokeWidth="1" />
+            <line x1="40" y1="1" x2="40" y2="79" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5" />
+            <line x1="1" y1="79" x2="79" y2="79" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5" />
+          </symbol>
+          
+          {/* Portrait SVG Placeholder - This would be a minimalist line art portrait */}
+          <symbol id="portrait-svg" viewBox="0 0 450 550">
+            <rect x="0" y="0" width="450" height="550" fill="white" />
+            {/* We'll keep this as a fallback but won't use it */}
+            <g fill="none" stroke="black" strokeWidth="1">
+              {/* Minimalist face outline */}
+              <path d="M225,150 C300,150 350,220 350,300 C350,400 300,450 225,450 C150,450 100,400 100,300 C100,220 150,150 225,150 Z" />
+              {/* Eyes */}
+              <ellipse cx="180" cy="250" rx="15" ry="10" />
+              <ellipse cx="270" cy="250" rx="15" ry="10" />
+              {/* Nose */}
+              <path d="M225,270 C230,290 240,300 225,320" />
+              {/* Mouth */}
+              <path d="M180,350 C200,370 250,370 270,350" />
+              {/* Hair */}
+              <path d="M150,200 C150,150 300,150 300,200" />
+              <path d="M100,250 C100,150 350,150 350,250" />
+              {/* Neck */}
+              <path d="M180,450 L180,500" />
+              <path d="M270,450 L270,500" />
+              {/* Shoulders */}
+              <path d="M180,500 L100,520" />
+              <path d="M270,500 L350,520" />
+            </g>
+          </symbol>
+        </defs>
+      </svg>
       
-      <div className="hero-container container">
+      {/* Liquid Morphing Background */}
+      <canvas ref={liquidRef} className="liquid-background"></canvas>
+      
+      {/* Neural Network Grid */}
+      <div className="neural-grid"></div>
+      
+      {/* Quantum Backdrop */}
+      <div ref={quantumBackdropRef} className="quantum-backdrop"></div>
+      
+      {/* Quantum Noise Texture */}
+      <div className="quantum-noise"></div>
+      
+      {/* Content Container */}
+      <div className="hero-container">
         <div className="hero-content">
-          {/* SIZE-inspired Status Indicator */}
-          <div className="hero-status">
-            <div className="status-indicator">
-              <div className="status-dot"></div>
-              <div className="status-ripple"></div>
-            </div>
-            <MorphingText 
-              text="Available for opportunities" 
-              className="status-text"
-              delay={500}
-            />
+          <div className="status-indicator">
+            <span className="status-dot"></span>
+            <span className="status-text">Available for opportunities</span>
           </div>
-
-          {/* Revolutionary Typography inspired by TRAE */}
-          <div className="hero-text">
-            <h1 className="hero-title">
-              <span className="title-line">
-                <GlitchText text="Abraham" className="name-text" />
-              </span>
-              <span className="title-line">
-                <MorphingText text="Mora-Tadeo" className="surname-text" delay={800} />
-              </span>
-            </h1>
-            
-            <div className="hero-subtitle">
-              <MorphingText 
-                text="Software Engineer & UI Designer" 
-                className="subtitle-text"
-                delay={1000}
-              />
-            </div>
-            
-            <div className="hero-description">
-              <MorphingText 
-                text="Creating exceptional digital experiences through innovative design and clean code architecture."
-                className="description-text"
-                delay={1200}
-              />
-            </div>
-          </div>
-
-          {/* SIZE-inspired Action Buttons */}
+          
+          <h1 className="hero-title">
+            <span className="name">ABRAHAM</span>
+            <span className="surname">Mora-Tadeo</span>
+          </h1>
+          
+          <p ref={textRef} className="hero-description">
+            Software Engineer & UI Designer creating exceptional digital experiences through innovative design and clean code architecture.
+          </p>
+          
           <div className="hero-actions">
-            <button className="primary-button magnetic-element">
-              <span className="button-bg"></span>
+            <Link to="/work" className="primary-button magnetic-element">
               <span className="button-text">View Work</span>
-              <ArrowRight size={16} className="button-arrow" />
-            </button>
+              <ArrowRight className="button-icon" />
+              <span className="button-backdrop"></span>
+            </Link>
             
-            <button className="secondary-button magnetic-element">
-              <span className="button-bg"></span>
-              <Download size={16} />
-              <span>Resume</span>
-            </button>
-          </div>
-
-          {/* TRAE-inspired Social Links */}
-          <div className="hero-social">
-            <a href="https://github.com" className="social-link magnetic-element">
-              <span className="social-bg"></span>
-              <Github size={18} />
+            <a href={resumePDF} download className="secondary-button magnetic-element">
+              <Download className="button-icon" />
+              <span className="button-text">Resume</span>
+              <span className="button-backdrop"></span>
             </a>
-            <a href="https://linkedin.com" className="social-link magnetic-element">
-              <span className="social-bg"></span>
-              <Linkedin size={18} />
+          </div>
+          
+          <div className="social-links">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-link magnetic-element">
+              <Github />
+              <span className="link-backdrop"></span>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link magnetic-element">
+              <Linkedin />
+              <span className="link-backdrop"></span>
             </a>
             <a href="mailto:abraham@example.com" className="social-link magnetic-element">
-              <span className="social-bg"></span>
-              <Mail size={18} />
+              <Mail />
+              <span className="link-backdrop"></span>
             </a>
           </div>
         </div>
-
-        {/* Revolutionary Image Section inspired by SIZE */}
+        
         <div className="hero-visual">
-          <div className="image-container">
-            <div 
-              className="image-wrapper"
-              style={{
-                transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px) rotateX(${mousePosition.y * 0.2}deg) rotateY(${mousePosition.x * 0.2}deg)`
-              }}
-            >
-              <img 
-                src="/Abraham.png" 
-                alt="Abraham Hernandez"
-                className="hero-image"
-              />
-              <div className="image-overlay"></div>
-              <div className="image-border"></div>
-            </div>
+          <div className="portrait-container parallax-element" data-speed="1" ref={portraitRef}>
+            {/* Replace SVG with actual image */}
+            <img src={AbrahamImage} alt="Abraham Mora-Tadeo" className="portrait-img" />
             
-            {/* SIZE-inspired Geometric Elements */}
-            <div className="geometric-elements">
-              <div className="geo-circle"></div>
-              <div className="geo-line-1"></div>
-              <div className="geo-line-2"></div>
-              <div className="geo-dot-1"></div>
-              <div className="geo-dot-2"></div>
-            </div>
+            {/* Keep these effects layers */}
+            <div className="portrait-frame"></div>
+            <div className="portrait-scan-line"></div>
+          </div>
+          
+          {/* Keep the geometric elements */}
+          <div className="geometric-elements">
+            <svg className="geo-circle parallax-element" data-speed="1.5" viewBox="0 0 100 100">
+              <use href="#geo-circle-svg" />
+            </svg>
+            
+            <svg className="geo-square parallax-element" data-speed="1.2" viewBox="0 0 60 60">
+              <use href="#geo-square-svg" />
+            </svg>
+            
+            <svg className="geo-triangle parallax-element" data-speed="1.8" viewBox="0 0 80 80">
+              <use href="#geo-triangle-svg" />
+            </svg>
+            
+            <div className="geo-line horizontal parallax-element" data-speed="0.8"></div>
+            <div className="geo-line vertical parallax-element" data-speed="0.9"></div>
+            <div className="geo-dot dot1 parallax-element" data-speed="2"></div>
+            <div className="geo-dot dot2 parallax-element" data-speed="1.7"></div>
+            <div className="geo-dot dot3 parallax-element" data-speed="1.3"></div>
           </div>
         </div>
       </div>
       
-      {/* TRAE-inspired Scroll Indicator */}
       <div className="scroll-indicator">
         <div className="scroll-line"></div>
-        <div className="scroll-text">Scroll to explore</div>
+        <span className="scroll-text">Scroll</span>
+      </div>
+      
+      <div className="loading-indicator"></div>
+      
+      {/* Quantum Particles */}
+      <div className="quantum-particles">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div 
+            key={i} 
+            className="quantum-particle parallax-element" 
+            data-speed={Math.random() * 2 + 0.5}
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 3 + 1}px`,
+              height: `${Math.random() * 3 + 1}px`,
+              opacity: Math.random() * 0.3 + 0.1
+            }}
+          ></div>
+        ))}
       </div>
     </section>
   );
-}
+};
 
 export default Hero;

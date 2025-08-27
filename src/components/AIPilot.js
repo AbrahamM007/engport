@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Bot, X, Send } from 'lucide-react';
 import './AIPilot.css';
+import { useNavigate } from 'react-router-dom'; // Add this import
 
 export default function AIPilot() {
   const [open, setOpen] = useState(false);
@@ -8,13 +9,35 @@ export default function AIPilot() {
     { role: 'ai', text: 'Hello! Need a tour, resume, or projects?' }
   ]);
   const [msg, setMsg] = useState('');
+  const navigate = useNavigate(); // Add this
 
   const send = () => {
     if (!msg.trim()) return;
     const next = [...log, { role: 'user', text: msg }];
-    // Mock smart replies for now
-    const ai = { role: 'ai', text: 'Opening Artifacts and highlighting recent work. Try the command palette next!' };
-    setLog([...next, ai]);
+    
+    // Simple command handling
+    let response = { role: 'ai', text: 'I\'m not sure how to help with that. Try asking about resume, work, or contact.' };
+    
+    const lowerMsg = msg.toLowerCase();
+    if (lowerMsg.includes('resume')) {
+      response.text = 'Opening your resume...';
+      // Open resume in new tab
+      window.open('/components/AbrahamMora_Resume.pdf', '_blank');
+    } else if (lowerMsg.includes('work') || lowerMsg.includes('project')) {
+      response.text = 'Navigating to your work page...';
+      setTimeout(() => navigate('/work'), 1000);
+    } else if (lowerMsg.includes('contact')) {
+      response.text = 'Taking you to the contact page...';
+      setTimeout(() => navigate('/contact'), 1000);
+    } else if (lowerMsg.includes('about')) {
+      response.text = 'Going to the about page...';
+      setTimeout(() => navigate('/about'), 1000);
+    } else if (lowerMsg.includes('home')) {
+      response.text = 'Returning to home page...';
+      setTimeout(() => navigate('/'), 1000);
+    }
+    
+    setLog([...next, response]);
     setMsg('');
   };
 
